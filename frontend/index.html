@@ -5,42 +5,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AQUA 🌊 | Voice Conversation</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Starbucks AI Barista ☕</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; background: #e0f7fa; }
-    .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    body { font-family: 'Inter', sans-serif; background: #f3f4f6; }
+    .glass { background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     .pulse-ring { animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
     @keyframes pulse-ring { 
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); } 
-      70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(6, 182, 212, 0); } 
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); } 
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); } 
+      70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(22, 163, 74, 0); } 
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); } 
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-  <div class="glass p-10 max-w-lg w-full text-center transition-all duration-500">
-    <h1 class="text-4xl font-bold text-cyan-800 mb-2">AQUA 🌊</h1>
-    <p class="text-gray-600 mb-8">Your AI Voice Companion</p>
+  <div class="glass p-8 max-w-md w-full text-center transition-all duration-500 relative">
+    <!-- Header -->
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold text-green-700 mb-1">Starbucks AI ☕</h1>
+      <p class="text-gray-500 text-sm">Your Personal Voice Barista</p>
+    </div>
 
+    <!-- START SCREEN -->
     <div id="start-screen">
-      <button id="start-conv-btn" class="bg-cyan-600 hover:bg-cyan-700 text-white text-xl font-semibold px-8 py-4 rounded-full shadow-lg transition-transform hover:scale-105">
-        💬 Start Conversation
+      <div class="bg-green-50 p-6 rounded-xl mb-6 text-left text-green-800 text-sm">
+        <p class="font-semibold mb-2">💡 Try saying:</p>
+        <ul class="list-disc pl-4 space-y-1">
+          <li>"I want a Grande Latte with Oat milk."</li>
+          <li>"Can I get a Cappuccino for Sarah?"</li>
+          <li>"Add vanilla syrup to that."</li>
+        </ul>
+      </div>
+      <button id="start-conv-btn" class="w-full bg-green-700 hover:bg-green-800 text-white text-lg font-semibold px-8 py-4 rounded-full shadow-lg transition-transform hover:scale-105">
+        Start Ordering
       </button>
     </div>
 
+    <!-- CONVERSATION SCREEN (Hidden initially) -->
     <div id="conversation-screen" class="hidden flex flex-col items-center">
       
-      <p id="status-text" class="text-xl font-medium text-gray-700 mb-6 h-8">Listen to Aqua...</p>
+      <!-- LIVE ORDER RECEIPT -->
+      <div class="w-full bg-gray-50 rounded-xl p-4 mb-6 border border-gray-200 text-left">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Current Order</h3>
+        <div id="order-display" class="space-y-2 text-sm text-gray-700">
+          <div class="flex justify-between"><span>Drink:</span> <span id="disp-drink" class="font-medium text-black">-</span></div>
+          <div class="flex justify-between"><span>Size:</span> <span id="disp-size" class="font-medium text-black">-</span></div>
+          <div class="flex justify-between"><span>Milk:</span> <span id="disp-milk" class="font-medium text-black">-</span></div>
+          <div class="flex justify-between"><span>Name:</span> <span id="disp-name" class="font-medium text-black">-</span></div>
+          <div class="border-t pt-2 mt-2 text-xs text-gray-500" id="disp-extras">Extras: None</div>
+        </div>
+      </div>
 
-      <button id="mic-toggle-btn" class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-4xl shadow-inner transition-all duration-300">
+      <!-- STATUS TEXT -->
+      <p id="status-text" class="text-lg font-medium text-gray-700 mb-6 h-6">Barista is ready...</p>
+
+      <!-- MIC TOGGLE BUTTON -->
+      <button id="mic-toggle-btn" class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-3xl shadow-inner transition-all duration-300">
         🎙️
       </button>
-      <p class="text-sm text-gray-500 mt-4">Tap Mic to Speak / Tap again to Send</p>
+      <p class="text-xs text-gray-400 mt-4">Tap to Speak / Tap to Send</p>
 
+      <!-- HIDDEN AUDIO ELEMENT -->
       <audio id="agent-audio" class="hidden"></audio>
     </div>
   </div>

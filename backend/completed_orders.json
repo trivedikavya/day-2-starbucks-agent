@@ -1,0 +1,3 @@
+{"timestamp": "2025-11-23T20:06:15.803106", "order": {"drinkType": "coffee", "size": "2 ml", "milk": "cow", "extras": [], "name": "Kavetruvedi", "is_complete": true}}
+{"timestamp": "2025-11-23T20:09:43.416367", "order": {"drinkType": "coffee", "size": "2 ML", "milk": "cow", "extras": ["neem", "caviar"], "name": "kavya", "is_complete": true}}
+{"timestamp": "2025-11-23T20:16:02.043047", "order": {"drinkType": "coffee", "size": "2 ML", "milk": "cow", "extras": ["caviar"], "name": "Caviar", "is_complete": true}}
